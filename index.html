@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterWorld Design Tokens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.60);
+            --glass-blur: blur(24px);
+            --glass-border: rgba(255, 255, 255, 0.50);
+            --glass-card-bg: rgba(249, 249, 247, 0.60);
+            --color-bg-primary: #F6F6F4;
+            --color-text-primary: #1A1A1A;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--color-bg-primary); color: var(--color-text-primary); }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background: var(--glass-card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+        }
+        .glass-header {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <!-- Navigation -->
+    <nav class="glass-header sticky top-0 z-50 px-6 py-5 lg:px-12 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#F4C84A] flex items-center justify-center text-[#1A1A1A]">
+                <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+            </div>
+            <span class="font-serif text-lg tracking-tight font-semibold text-[#1A1A1A]">BetterWorld</span>
+            <span class="px-2 py-0.5 rounded-full bg-[#EFEFEA] border border-[rgba(0,0,0,0.04)] text-[10px] font-semibold tracking-widest uppercase text-[#7A7A7A]">Design System 1.0</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <a href="#" class="text-sm font-medium text-[#4A4A4A] hover:text-[#1A1A1A] transition-colors">Documentation</a>
+            <a href="#" class="text-sm font-medium text-[#4A4A4A] hover:text-[#1A1A1A] transition-colors">Components</a>
+            <button class="w-10 h-10 rounded-full border border-[rgba(0,0,0,0.06)] bg-white flex items-center justify-center text-[#7A7A7A] hover:text-[#F4C84A] shadow-sm hover:shadow-md transition-all">
+                <i data-lucide="moon" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16">
+        
+        <!-- Header Section -->
+        <header class="mb-12 max-w-2xl">
+            <h1 class="font-serif text-4xl lg:text-5xl font-semibold tracking-tight mb-4 text-[#1A1A1A]">Global Design Tokens</h1>
+            <p class="text-lg text-[#4A4A4A] leading-relaxed">
+                The atomic core of the BetterWorld visual language. Defined by our updated UI kit to ensure consistency and warmth across the platform.
+            </p>
+        </header>
+
+        <!-- Token Table Card -->
+        <div class="glass-panel rounded-[32px] shadow-[0_10px_28px_rgba(0,0,0,0.07)] overflow-hidden">
+            
+            <!-- Table Header -->
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] bg-[#F9F9F7]/50">
+                <div class="col-span-4 text-xs font-semibold uppercase tracking-widest text-[#7A7A7A]">Token Name</div>
+                <div class="col-span-3 text-xs font-semibold uppercase tracking-widest text-[#7A7A7A]">Token Value</div>
+                <div class="col-span-3 text-xs font-semibold uppercase tracking-widest text-[#7A7A7A]">Resolved Value</div>
+                <div class="col-span-2 text-xs font-semibold uppercase tracking-widest text-[#7A7A7A]">Visual Preview</div>
+            </div>
+
+            <!-- 2.1 Spacing Scale -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)]">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="ruler" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Spacing Scale</h3>
+                </div>
+            </div>
+            
+            <script>
+                const spacing = {
+                    'space-xxs': '4px', 'space-xs': '8px', 'space-sm': '12px', 'space-md': '16px',
+                    'space-lg': '20px', 'space-xl': '24px', 'space-2xl': '32px', 'space-3xl': '40px',
+                    'space-4xl': '48px', 'space-5xl': '64px', 'space-6xl': '80px'
+                };
+                Object.entries(spacing).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-2 flex items-center">
+                                <div class="h-4 bg-[#F4C84A]/30 border-l border-r border-[#F4C84A]" style="width: ${val};"></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 2.2 Border Radius -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="crop" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Border Radius</h3>
+                </div>
+            </div>
+            
+            <script>
+                const radius = {
+                    'radius-xs': '8px', 'radius-sm': '12px', 'radius-md': '16px', 'radius-lg': '20px',
+                    'radius-xl': '24px', 'radius-2xl': '32px', 'radius-3xl': '40px', 'radius-4xl': '48px',
+                    'radius-pill': '999px'
+                };
+                Object.entries(radius).forEach(([name, val]) => {
+                    const previewClass = name === 'radius-pill' ? 'rounded-full w-12 h-6 border-2' : `rounded-tl-[${val}] w-8 h-8 border-t-2 border-l-2`;
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-2 flex items-center pl-2">
+                                <div class="${previewClass} border-[#F4C84A]"></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 2.3 Elevation System -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="layers" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Elevation System</h3>
+                </div>
+            </div>
+            
+            <script>
+                const elevations = [
+                    { name: 'elevation-soft', val: '0 6px 16px rgba(0,0,0,0.05)', bg: 'bg-white' },
+                    { name: 'elevation-card', val: '0 10px 28px rgba(0,0,0,0.07)', bg: 'bg-white' },
+                    { name: 'elevation-hover', val: '0 16px 48px rgba(0,0,0,0.08)', bg: 'bg-white' },
+                    { name: 'elevation-button-gold', val: '0 6px 16px rgba(244,200,74,0.3)', bg: 'bg-[#F4C84A]' },
+                    { name: 'elevation-button-gold-hover', val: '0 10px 28px rgba(244,200,74,0.4)', bg: 'bg-[#F4C84A]' },
+                    { name: 'elevation-floating', val: '0 20px 40px rgba(0,0,0,0.12)', bg: 'bg-white' }
+                ];
+                elevations.forEach(e => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${e.name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A] truncate pr-4">${e.val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">box-shadow</div>
+                            <div class="col-span-2 flex items-center pl-2">
+                                <div class="w-10 h-10 rounded-xl ${e.bg}" style="box-shadow: ${e.val};"></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 2.4 Glassmorphism -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Glassmorphism</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">glass-bg</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">rgba(255,255,255,0.60)</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Background</div>
+                <div class="col-span-2"><div class="w-10 h-10 rounded-xl bg-white/60 border border-white/50 backdrop-blur-[24px]"></div></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">glass-card-bg</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">rgba(249,249,247,0.60)</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Card Variant</div>
+                <div class="col-span-2"><div class="w-10 h-10 rounded-xl bg-[#F9F9F7]/60 border border-white/50 backdrop-blur-[24px]"></div></div>
+            </div>
+
+            <!-- 3.1 Background Colors -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="palette" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Background Colors</h3>
+                </div>
+            </div>
+            <script>
+                const bgColors = {
+                    'color-bg-primary': '#F6F6F4', 'color-bg-secondary': '#FFFFFF',
+                    'color-bg-card': '#F9F9F7', 'color-bg-panel': '#EFEFEA', 'color-bg-muted': '#ECECE6'
+                };
+                Object.entries(bgColors).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A] uppercase">${val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Solid</div>
+                            <div class="col-span-2 flex items-center pl-2">
+                                <div class="w-8 h-8 rounded-full border border-[rgba(0,0,0,0.06)] shadow-sm" style="background-color: ${val};"></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 3.2 Brand Accents -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="award" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Brand Accents</h3>
+                </div>
+            </div>
+            <script>
+                const accents = {
+                    'color-accent-gold': '#F4C84A', 'color-accent-gold-hover': '#E9B949', 'color-accent-gold-light': '#F7DE8A',
+                    'color-accent-sage': '#9DB08F', 'color-accent-mint': '#CFE6DA', 'color-accent-green': '#7BC47F',
+                    'color-accent-amber': '#E9B949'
+                };
+                Object.entries(accents).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A] uppercase">${val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Accent</div>
+                            <div class="col-span-2 flex items-center pl-2">
+                                <div class="w-8 h-8 rounded-full shadow-sm" style="background-color: ${val};"></div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 3.3 Text Colors -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="type" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Text Colors</h3>
+                </div>
+            </div>
+            <script>
+                const textColors = {
+                    'color-text-primary': '#1A1A1A', 'color-text-secondary': '#4A4A4A',
+                    'color-text-tertiary': '#7A7A7A', 'color-text-placeholder': '#A0A0A0', 'color-text-muted': '#BDBDB5'
+                };
+                Object.entries(textColors).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A] uppercase">${val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Text</div>
+                            <div class="col-span-2 flex items-center pl-2">
+                                <span class="text-lg font-bold" style="color: ${val};">Aa</span>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 4.2 Typography System -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="text-quote" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Type Scale</h3>
+                </div>
+            </div>
+            <script>
+                const typography = [
+                    { name: 'text-hero', val: '48px / 60px', weight: '600', sample: 'Hero Display' },
+                    { name: 'text-section', val: '32px / 48px', weight: '600', sample: 'Section Title' },
+                    { name: 'text-card-title', val: '18px / 20px', weight: '600', sample: 'Card Title' },
+                    { name: 'text-body-lg', val: '18px / 20px', weight: '400', sample: 'Body Large' },
+                    { name: 'text-body', val: '14px / 15px', weight: '400', sample: 'Body Default' },
+                    { name: 'text-label', val: '10px-12px', weight: '600', sample: 'LABEL TAG' }
+                ];
+                typography.forEach(t => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-6 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${t.name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${t.val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Weight: ${t.weight}</div>
+                            <div class="col-span-2 flex items-center overflow-hidden">
+                                <span class="truncate whitespace-nowrap text-[#1A1A1A]" style="font-size: 16px; font-weight: ${t.weight};">${t.sample}</span>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 5.2 Iconography -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="smile" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Icon Sizes</h3>
+                </div>
+            </div>
+            <script>
+                const iconSizes = {
+                    'icon-xs': '12px', 'icon-sm': '14px', 'icon-md': '18px', 'icon-base': '20px',
+                    'icon-lg': '24px', 'icon-xl': '28px', 'icon-2xl': '32px'
+                };
+                Object.entries(iconSizes).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Stroke: 1.5</div>
+                            <div class="col-span-2 flex items-center pl-2">
+                                <i data-lucide="heart" style="width: ${val}; height: ${val};"></i>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 6.0 Core Components -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="component" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Core Components</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">button-primary</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Height: 48px</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Primary CTA</div>
+                <div class="col-span-2"><button class="px-6 py-2 bg-[#F4C84A] text-[#1A1A1A] rounded-full text-xs font-semibold shadow-[0_6px_16px_rgba(244,200,74,0.3)] hover:scale-105 transition-all">Donate</button></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">button-secondary</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Glass White</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Secondary CTA</div>
+                <div class="col-span-2"><button class="px-6 py-2 bg-white/60 backdrop-blur-xl border border-white/50 text-[#1A1A1A] rounded-full text-xs font-semibold">Share</button></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">button-icon</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">40px x 40px</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Circular Icon</div>
+                <div class="col-span-2"><button class="w-10 h-10 bg-white border border-[rgba(0,0,0,0.06)] rounded-full flex items-center justify-center text-[#7A7A7A] hover:text-[#F4C84A] shadow-sm"><i data-lucide="share-2" class="w-4 h-4"></i></button></div>
+            </div>
+
+            <!-- 7.0 Form Elements -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="text-cursor-input" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Form Elements</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-6 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">input-text</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Pill Shape</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Standard Input</div>
+                <div class="col-span-2"><input type="text" placeholder="Email Address" class="w-full px-4 py-2 bg-white border border-[rgba(0,0,0,0.06)] rounded-full text-xs focus:outline-none"></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-6 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">form-hero</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Glass + Button</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Hero Form</div>
+                <div class="col-span-2 flex items-center bg-white/60 backdrop-blur-xl border border-white/50 rounded-full p-1 pl-4 shadow-md">
+                    <input type="text" placeholder="Search..." class="bg-transparent text-[10px] w-full focus:outline-none">
+                    <button class="bg-[#F4C84A] p-2 rounded-full"><i data-lucide="search" class="w-3 h-3"></i></button>
+                </div>
+            </div>
+
+            <!-- 8.0 Card System -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="layout" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Card System</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-8 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">card-standard</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Radius-2xl (32px)</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Glassmorph Card</div>
+                <div class="col-span-2"><div class="w-24 h-16 bg-[#F9F9F7]/60 backdrop-blur-xl border border-white/50 rounded-[20px] shadow-lg"></div></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-8 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">card-floating</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Rotate ±3°</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Hero Accent</div>
+                <div class="col-span-2"><div class="w-20 h-14 bg-white/80 backdrop-blur-md rounded-xl shadow-xl rotate-3"></div></div>
+            </div>
+
+            <!-- 9.0 Badges & Tags -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="tag" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Badges & Tags</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">badge-status</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Pill + Dot</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Status Label</div>
+                <div class="col-span-2"><span class="px-3 py-1 bg-[#EFEFEA] border border-[rgba(0,0,0,0.06)] rounded-full text-[10px] font-medium flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#7BC47F]"></span>Active</span></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">badge-live</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Animated Pulse</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">High Urgency</div>
+                <div class="col-span-2"><span class="px-2 py-0.5 bg-white/90 border border-[#7BC47F]/30 rounded-full text-[9px] font-bold text-[#7BC47F] uppercase tracking-wider flex items-center gap-1">LIVE</span></div>
+            </div>
+
+            <!-- 10.0 Progress Indicators -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Progress Indicators</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-6 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">progress-bar</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">H: 8px / Gold</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Standard Fill</div>
+                <div class="col-span-2"><div class="w-full h-2 bg-[#ECECE6] rounded-full overflow-hidden"><div class="w-3/5 h-full bg-[#F4C84A]"></div></div></div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-6 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">progress-goal</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">H: 6px / Green</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Fundraising Goal</div>
+                <div class="col-span-2"><div class="w-full h-1.5 bg-[#ECECE6] rounded-full overflow-hidden"><div class="w-[85%] h-full bg-[#7BC47F]"></div></div></div>
+            </div>
+
+            <!-- 11.0 Avatar System -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="user-circle" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Avatar System</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-6 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">avatar-stack</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Overlap: -8px</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">User Groups</div>
+                <div class="col-span-2 flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full border-2 border-white bg-[#F4C84A] flex items-center justify-center text-[10px] font-bold">JD</div>
+                    <div class="w-8 h-8 rounded-full border-2 border-white bg-[#9DB08F] flex items-center justify-center text-[10px] font-bold">SM</div>
+                    <div class="w-8 h-8 rounded-full border-2 border-white bg-[#EFEFEA] flex items-center justify-center text-[10px] font-bold text-[#7A7A7A]">+5</div>
+                </div>
+            </div>
+
+            <!-- 15.0 Animation & Transitions -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="zap" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Animation & Transitions</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 px-8 py-5 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 items-center">
+                <div class="col-span-4 font-mono text-sm font-medium">duration-normal</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">300ms</div>
+                <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">Default Speed</div>
+                <div class="col-span-2 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-[#F4C84A] animate-pulse"></div>
+                    <span class="text-[10px] font-mono text-[#7A7A7A]">Ease-Default</span>
+                </div>
+            </div>
+
+            <!-- 17.0 Responsive Breakpoints -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="monitor" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Responsive Breakpoints</h3>
+                </div>
+            </div>
+            <script>
+                const breakpoints = {
+                    'breakpoint-sm': '640px', 'breakpoint-md': '768px', 'breakpoint-lg': '1024px',
+                    'breakpoint-xl': '1280px', 'breakpoint-2xl': '1400px'
+                };
+                Object.entries(breakpoints).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-5 font-mono text-xs text-[#7A7A7A]">Max Width: ${val}</div>
+                        </div>
+                    `);
+                });
+            </script>
+
+            <!-- 18.0 Z-Index Scale -->
+            <div class="px-8 py-4 bg-[#EFEFEA]/30 border-b border-[rgba(0,0,0,0.06)] mt-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="layers-2" class="w-4 h-4 text-[#F4C84A]"></i>
+                    <h3 class="text-sm font-semibold text-[#1A1A1A]">Z-Index Scale</h3>
+                </div>
+            </div>
+            <script>
+                const zIndex = {
+                    'z-base': '0', 'z-dropdown': '10', 'z-floating': '20',
+                    'z-overlay': '30', 'z-modal': '40', 'z-tooltip': '50', 'z-nav': '50'
+                };
+                Object.entries(zIndex).forEach(([name, val]) => {
+                    document.write(`
+                        <div class="grid grid-cols-12 gap-4 px-8 py-4 border-b border-[rgba(0,0,0,0.06)] hover:bg-white/40 transition-colors group items-center">
+                            <div class="col-span-4 font-mono text-sm font-medium text-[#1A1A1A]">${name}</div>
+                            <div class="col-span-3 font-mono text-xs text-[#7A7A7A]">${val}</div>
+                            <div class="col-span-5 font-mono text-xs text-[#7A7A7A]">Stack Level: ${val}</div>
+                        </div>
+                    `);
+                });
+            </script>
+
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
